@@ -1,5 +1,4 @@
 
-setwd("D:/TEMP")
 install.packages("readxl")
 library("readxl")
 install.packages("plotly")
@@ -17,6 +16,8 @@ library("dplyr")
 install.packages("dplyr")
 library("ggplus")
 install.packages("ggplus")
+install.packages("tidyverse")
+library("tidyverse")
 devtools::install_github("guiastrennec/ggplus")
 
 library("tibble")
@@ -27,8 +28,9 @@ library('plyr')
 library("stringi")
 library("ggplot2")
 library("tribble")
-setwd("D:/TEMP")
+library("tidyverse")
 
+setwd("D:/TEMP/robocze")
 
 dat <- read.csv("codz.csv", header = FALSE)
 

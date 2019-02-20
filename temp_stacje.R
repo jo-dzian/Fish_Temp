@@ -7,7 +7,7 @@ library("xlsx")
 library("rJava")
 
 
-setwd("D:/TEMP/R")
+setwd("D:/TEMP/robocze")
 
 df = read.csv("mapa_zawartosci_T_edit.csv", header = TRUE)
 df[,"total_1951_1960"] <- NA
