@@ -76,8 +76,23 @@ with_sort$date <- as.Date(with(with_sort, paste(with_sort$DZIEN, with_sort$MONTH
 p5 <- ggplot2::ggplot(with_sort, ggplot2::aes(x = date, y = TEMP))
 p5 + ggplot2::geom_line(ggplot2::aes(color = POSTERUNEK))
 # kazdy wykres oddzielnie
-(p5 <- p5 + ggplot2::geom_line() +
-    ggplot2::facet_wrap(~POSTERUNEK, ncol=2, nrow=2))
+p6 <- p5 + ggplot2::geom_line() +
+    ggplot2::facet_wrap(~POSTERUNEK, ncol=1, nrow=104)
+
+options(repr.plot.width=4, repr.plot.height=4)
+for (sym in with_sort) {
+  p <- with_sort %>%
+    filter(POSTERUNEK == sym) %>%
+    ggplot(aes(x=date, y=TEMP)) +
+    geom_line() +
+    geom_point() +
+    ggtitle(sym)
+}
+ggsave(p, temperatura=paste('D:/TEMP/robocze/graphs',with_sort[sym], ".png", sep=''), scale=2)
+dev.off()
+#save plots as .pdf
+
+
 ####### DZIAŁA OUTPUTY NA WIELU STRONACH I W LANDSCAPE = paper="a4r"
 
 # wszystkie na 1
@@ -103,4 +118,24 @@ dev.off()
 
 #dodac zaczac wszystkie wykresy od tego samego roku, dodac nazwe rzeki
 
+#Loop for creating graphs for each station throughout different time periods
+install.packages("repr")
+library("repr")
+
+# Change plot size to 4 x 3
+options(repr.plot.width=4, repr.plot.height=4)
+#first make sure the Date variable follows the correct date structure
+dat$Date <- as.Date(dat$Date)
+
+p5 <- ggplot2::ggplot(with_sort, ggplot2::aes(x = date, y = TEMP))+ 
+  geom_point() + 
+  geom_line() +
+  facet_wrap(~ Symbol, scales = "free_y")
+p5 + ggplot2::geom_line(ggplot2::aes(color = POSTERUNEK))
+
+# Now we can do facetting in ggplot!
+ggplot(dat, aes(x=Date, y=Close)) + 
+  geom_point() + 
+  geom_line() +
+  facet_wrap(~ Symbol, scales = "free_y")
 
