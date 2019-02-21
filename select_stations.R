@@ -80,13 +80,13 @@ p6 <- p5 + ggplot2::geom_line() +
     ggplot2::facet_wrap(~POSTERUNEK, ncol=1, nrow=104)
 
 options(repr.plot.width=4, repr.plot.height=4)
-for (sym in with_sort) {
+for (POSTERUNEK in with_sort) {
   p <- with_sort %>%
-    filter(POSTERUNEK == sym) %>%
+    filter(POSTERUNEK) %>%
     ggplot(aes(x=date, y=TEMP)) +
     geom_line() +
     geom_point() +
-    ggtitle(sym)
+    ggtitle(POSTERUNEK)
 }
 ggsave(p, temperatura=paste('D:/TEMP/robocze/graphs',with_sort[sym], ".png", sep=''), scale=2)
 dev.off()
